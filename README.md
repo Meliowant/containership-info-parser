@@ -1,7 +1,5 @@
 # Web Scrawler for retrieving data from container-ship.com
 
-======
-
 One of my friends asked me if there is any way to retrieve data from [http://www.containership-info.com].
 Firstly I thought about Selenium, but taking into account it is not a quite complex site, and I had no idea about Python3 and Scrapy I decided to test them out.
 This repository contains my tiny script to process and retrieve data from [http://www.containership-info.com] so it can be added to any other editor for processing.
