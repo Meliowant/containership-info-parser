@@ -3,6 +3,10 @@ import scrapy
 
 class SiteSpider(scrapy.Spider):
     name = 'siteSpider'
+    custom_settings = {
+        'CONCURRENT_ITEMS': 1,
+        'CONCURRENT_REQUESTS': 1,
+    }
     start_urls = ['http://www.containership-info.com/page_names_a.html',
                   'http://www.containership-info.com/page_names_b.html',
                   'http://www.containership-info.com/page_names_c.html',
@@ -37,10 +41,11 @@ class SiteSpider(scrapy.Spider):
         if vals:
             ship_no = vals[0][vals[0].find(":")+1:].strip()
         for ship_info in vals:
+            self.log(ship_info)
             if len(ship_info[:ship_info.find(":")].strip()) > 0:
                 yield {
                     'ship number': ship_no,
-                    'ship_field': ship_info[:ship_info.find(":")].strip(),
+                    'ship_field': ship_info[:ship_info.find(":")].replace('\r\n', ' ').replace('\n\r', ' ').strip(),
                     'ship_field_value': ship_info[ship_info.find(":")+1:].
                     strip()
                 }
